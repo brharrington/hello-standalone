@@ -1,0 +1,19 @@
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+  jcenter()
+}
+
+task(runMain, dependsOn: 'classes', type: JavaExec) {
+  main = 'com.netflix.hello.Main'
+  classpath = sourceSets.main.runtimeClasspath
+  args = []
+  systemProperties = [ "netflix.appinfo.port": "12345" ]
+}
