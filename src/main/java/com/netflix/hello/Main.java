@@ -10,9 +10,9 @@ import java.net.InetSocketAddress;
 public class Main {
 
   private static final HttpHandler HEALTHCHECK = (HttpExchange exchange) -> {
-    InputStream in = exchange.getRequestBody();
-    copyToDevNull(in);
-    in.close();
+    try (InputStream in = exchange.getRequestBody()) {
+      copyToDevNull(in);
+    }
     exchange.sendResponseHeaders(200, -1);
   };
 
