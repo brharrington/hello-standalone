@@ -13,6 +13,19 @@ repositories {
   jcenter()
 }
 
+String buildMode = System.getenv("BUILD_MODE")
+if ("NETFLIX_INTERNAL".equals(buildMode)) {
+  dependencies {
+    compile 'com.netflix.nfplugin:nfplugin-atlas:latest.snapshot'
+    compile 'com.netflix.nfplugin:nfplugin-core:latest.snapshot'
+    compile 'com.netflix.nfplugin:nfplugin-gov:latest.snapshot'
+    compile 'com.netflix.nfplugin:nfplugin-jmxport:latest.snapshot'
+    compile 'com.netflix.nfplugin:nfplugin-eureka:latest.snapshot'
+    compile 'com.netflix.nfplugin:nfinternal-atlas:latest.snapshot'
+    compile 'com.netflix.nfplugin:nfinternal-eureka:latest.snapshot'
+  }
+}
+
 task(runMain, dependsOn: 'classes', type: JavaExec) {
   main = 'com.netflix.hello.Main'
   classpath = sourceSets.main.runtimeClasspath
