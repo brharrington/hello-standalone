@@ -3,6 +3,7 @@ package com.netflix.hello;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import com.netflix.nfplugin.gov.GovernatorPluginManager;
 import java.io.InputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -29,11 +30,13 @@ public class Main {
   }
 
   public void start() throws IOException {
+    GovernatorPluginManager.getInstance().start();
     server.start();
   }
 
   public void shutdown() {
     server.stop(1);
+    GovernatorPluginManager.getInstance().shutdown();
   }
 
   public static void main(String[] args) throws IOException {
